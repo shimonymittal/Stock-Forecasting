@@ -7,6 +7,11 @@ warnings.filterwarnings('ignore')
 class DataPreprocessing:
 
   def drop_dupicates(self, company_dict, company_data, verbose=True):
+    """
+    There are 200 companies. If the data contains rates of stocks taken quarterly for 25 years.
+    Each company should have 25*4 = 100 datarows. Any company having datarows beyond this value has duplicates.
+    Removing duplicates hrough this method.
+    """
     # Validation checks
     if verbose:
       total_rows = sum(len(df) for df in company_dict.values())
@@ -30,10 +35,13 @@ class DataPreprocessing:
 
     return company_dict
 
-  # It is observed if Price is null, PE ratio is null.
-  # Therefore, removing the companies with more than 75% Price value null
-  # In this case, companies 091 and 121
+  
   def check_for_75_percent_price_null(self, company_dict):
+    """
+    It is observed if Price is null, PE ratio is null. Thus EPS cannot be calculated.
+    Therefore, removing the companies with more than 75% Price value null.
+    In this case, companies 091 and 121 have 100% Price and PE ratio values null.
+    """
     company_with_null_price = []
     for company, df in company_dict.items():
       # 1. Quantify the missing data for the companies
@@ -72,6 +80,10 @@ class DataPreprocessing:
     return company_dict
 
   def impute_missing_values_with_forward_backward_average(self, company_dict, columns_to_impute=None):
+    """
+    This method is to impute missing values. Instead of using forward or backward filling, 
+    an average of forward and backward is used.
+    """
     imputed_dict = {}
 
     for company, df in company_dict.items():
@@ -105,6 +117,11 @@ class DataPreprocessing:
     return imputed_dict
 
   def handle_missing_values(self, company_dict):
+    """
+    The values that can be computed based on other columns are filled.
+    Price column is made absolute as Price is always positive.
+    Rest all missing values are imputed using average of forward and backward filling
+    """
     for _, df in company_dict.items():
       # Missing Price
       df.loc[df['Price'].isna() & df['PE ratio'].notna() & df['EPS'].notna(), 'Price'] = df['PE ratio'] * df['EPS']
@@ -120,6 +137,9 @@ class DataPreprocessing:
     return company_dict
 
   def create_target_column(self, combined_df):
+    """
+    Create a new target column based on the next quarter price.
+    """
     combined_df['Next_Quarter_Price'] = combined_df.groupby('Company')['Price'].shift(-1)
     combined_df['Return'] = (combined_df['Next_Quarter_Price'] - combined_df['Price']) / combined_df['Price']
     combined_df['Target'] = (combined_df['Return'] > 0).astype(int)
