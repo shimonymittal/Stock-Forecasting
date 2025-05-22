@@ -3,7 +3,7 @@ Given a dataset of a fictional universe of companies with quarterly financial da
 
 ## Methodology
 
-Data Exploration : DataExploration.ipynb
+#### Data Exploration : DataExploration.ipynb
 
 1.Investigated correlation between features
 
@@ -16,11 +16,11 @@ Data Exploration : DataExploration.ipynb
 The jupyter notebook contains detailed results and comments
 
 
-Data Preprocessing: DataPreprocessing.py, Utils.py, Preprocessing.ipynb
+**Data Preprocessing**: DataPreprocessing.py, Utils.py, Preprocessing.ipynb
 
-Original dataset: dataset.csv
+**Original dataset**: dataset.csv
 
-Preporcessed dataset: dataset_preprocessed.csv
+**Preporcessed dataset**: dataset_preprocessed.csv
 
 1.Handled missing values using forward-backward averaging
 
@@ -31,9 +31,9 @@ Preporcessed dataset: dataset_preprocessed.csv
 The jupyter notebook contains detailed results and comments
 
 ### Modeling Approaches
-1. Random Forest  : RandomForest.ipynb
-2. Temporal Fusion Transformer (TFT)  : TFTModel.ipynb
-3. LSTM  : LSTMModel.ipynb
+1. **Random Forest**  : RandomForest.ipynb
+2. **Temporal Fusion Transformer (TFT)**  : TFTModel.ipynb
+3. **LSTM**  : LSTMModel.ipynb
 
 All descriptions, reasonings and comments in TFTModel.ipynb, LSTMModel.ipynb, RandomForest.ipynb files
 
