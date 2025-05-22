@@ -44,7 +44,7 @@ Precision, Recall anf F1-score
 
 #### Comparative Analysis:
 The best results were obtained with TFT and LSTM. Although the accuracy remains very similar in all the 3 cases.
-But since the data is not balanced (rise in stocks is almost double then the fall in stocks)
-Therefore, confusion matrix is used for comparing
+But since the data is not balanced (rise in stocks is almost double then the fall in stocks).
+Therefore, confusion matrix is used for comparison purpose. 
 
 
