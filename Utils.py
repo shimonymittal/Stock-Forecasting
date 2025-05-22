@@ -33,8 +33,6 @@ class Utils:
         company_dict[company] = df[df['Company']== company]
       return company_dict
 
-  # The data contains duplicates in Date column, since the stocks are recorded quarterly for 25 years,
-  # the data per company should be 25*4 = 100, therefore removing duplicates
   def plot_size_histogram_of_company(self, df):
       df.groupby('Company').size().plot.hist()
       plt.xlabel("Rows / Dataframe")
